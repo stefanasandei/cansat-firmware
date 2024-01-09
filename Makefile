@@ -1,17 +1,17 @@
-CC = avr-gcc
+CC = avr-g++
 OBJCOPY = avr-objcopy
 MCU = atmega328p
 F_CPU = 16000000UL
 PORT = COM6
 PROGRAMMER = arduino
 
-CFLAGS = -Wall -Os -DF_CPU=$(F_CPU) -mmcu=$(MCU)
+CFLAGS = -Wall -Os -DF_CPU=$(F_CPU) -mmcu=$(MCU) -std=c++17
 
 SRC_DIR = src
 BIN_DIR = bin
 
-SOURCES = $(wildcard $(SRC_DIR)/*.c)
-OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(BIN_DIR)/%.o)
 
 all: $(BIN_DIR)/firmware.hex
 
@@ -21,7 +21,7 @@ $(BIN_DIR)/firmware.hex: $(BIN_DIR)/firmware.out
 $(BIN_DIR)/firmware.out: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(BIN_DIR)/%.o: $(SRC_DIR)/%.c | $(BIN_DIR)
+$(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BIN_DIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(BIN_DIR):
