@@ -1,0 +1,30 @@
+# Ignore compiled files
+*.hex
+*.elf
+
+# Ignore build directories
+bin/
+build/
+
+# Ignore Arduino IDE and project settings
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*.settings
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+
+# Ignore user-specific files
+*.config
+*.suo
+*.user
+*.cache
+
+# Ignore miscellaneous files
+*.log
+*.bak
+
