@@ -1,17 +1,17 @@
 CC = avr-g++
 OBJCOPY = avr-objcopy
 MCU = atmega328p
-F_CPU = 16000000UL
 PORT = COM6
 PROGRAMMER = arduino
 
-CFLAGS = -Wall -Os -DF_CPU=$(F_CPU) -mmcu=$(MCU) -std=c++17
+CFLAGS = -Wall -Os -mmcu=$(MCU) -std=c++17
 
 SRC_DIR = src
 BIN_DIR = bin
 
-SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
-OBJECTS = $(SOURCES:$(SRC_DIR)/%.cpp=$(BIN_DIR)/%.o)
+SOURCES := $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/**/*.cpp)
+OBJECTS := $(patsubst $(SRC_DIR)/%.cpp, $(BIN_DIR)/%.o, $(SOURCES))
+OBJ_DIRS := $(sort $(dir $(OBJECTS)))
 
 all: $(BIN_DIR)/firmware.hex
 
@@ -21,11 +21,11 @@ $(BIN_DIR)/firmware.hex: $(BIN_DIR)/firmware.out
 $(BIN_DIR)/firmware.out: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp | $(BIN_DIR)
+$(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIRS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(BIN_DIR):
-	mkdir -p $(BIN_DIR)
+$(OBJ_DIRS):
+	mkdir -p $(OBJ_DIRS)
 
 clean:
 	rm -rf $(BIN_DIR)
