@@ -1,3 +1,7 @@
+//
+// Created by Stefan on 4/4/2024.
+//
+
 #ifndef CANSAT_HPP
 #define CANSAT_HPP
 
@@ -5,4 +9,4 @@
 #define BUAD 9600
 #define BUAD_RATE_CALC ((F_CPU / 16 / BUAD) - 1)
 
-#endif
+#endif//CANSAT_HPP

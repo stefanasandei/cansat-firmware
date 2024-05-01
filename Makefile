@@ -4,10 +4,10 @@ MCU = atmega328p
 PORT = COM6
 PROGRAMMER = arduino
 
-CFLAGS = -Wall -Os -mmcu=$(MCU) -std=c++17
-
 SRC_DIR = src
 BIN_DIR = bin
+
+CFLAGS = -Wall -Os -I$(SRC_DIR) -mmcu=$(MCU) -std=c++17
 
 SOURCES := $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/**/*.cpp)
 OBJECTS := $(patsubst $(SRC_DIR)/%.cpp, $(BIN_DIR)/%.o, $(SOURCES))
