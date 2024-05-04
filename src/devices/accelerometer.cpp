@@ -40,6 +40,11 @@ namespace CanSat {
         data.z = m_GyroAngles[2];
     }
 
+    void Accelerometer::get_temp(int32_t &data) {
+        int32_t value = get_reg(TEMP_OUT_H, 2);
+        data = value / 340 + 31.53f;
+    }
+
     void Accelerometer::get_accel() {
         m_AccelData[0] = get_reg(ACCEL_XOUT_H, 2);
         m_AccelData[1] = get_reg(ACCEL_YOUT_H, 2);

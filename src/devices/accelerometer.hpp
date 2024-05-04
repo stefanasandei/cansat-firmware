@@ -22,12 +22,13 @@ namespace CanSat {
         ~Accelerometer();
 
         void get_rotation(SpatialData &data);
+        void get_temp(int32_t &data);
 
     private:
         void init() const;
 
-        void get_accel();
-        void get_gyro();
+        void get_raw_accel();
+        void get_raw_gyro();
 
         float accel_angle(float a, float b, float c) const;
         float gryo_angle(float prev_data, int32_t data, int32_t delta) const;

@@ -16,12 +16,15 @@ int main(void) {
     CanSat::Accelerometer acc;
 
     CanSat::SpatialData spatial{};
+    int32_t temp;
 
     for (;;) {
         acc.get_rotation(spatial);
+        acc.get_temp(temp);
 
-        (void) sprintf(msg, "%ld,%ld,%ld\n",
-                       spatial.x, spatial.y, spatial.z);
+        // (void) sprintf(msg, "%ld,%ld,%ld\n",
+        //                spatial.x, spatial.y, spatial.z);
+        (void) sprintf(msg, "%d\n", temp);
         com.write(msg);
 
         _delay_ms(100);
