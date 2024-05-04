@@ -20,11 +20,11 @@ int main(void) {
     for (;;) {
         acc.get_rotation(spatial);
 
-        (void) sprintf(msg, "(%d, %d, %d)\n",
+        (void) sprintf(msg, "%ld,%ld,%ld\n",
                        spatial.x, spatial.y, spatial.z);
         com.write(msg);
 
-        _delay_ms(500);
+        _delay_ms(100);
     }
 
     return 0;

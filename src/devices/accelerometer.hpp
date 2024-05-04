@@ -45,7 +45,7 @@ namespace CanSat {
     private:
         I2C m_I2C;
 
-        int16_t *m_AccelData, *m_GyroData;
+        int32_t *m_AccelData, *m_GyroData;
         float *m_AccelAngles, *m_GyroAngles;
         float *m_Data;
     };

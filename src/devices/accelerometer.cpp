@@ -9,13 +9,9 @@
 
 namespace CanSat {
 
-    int32_t map(float x, int32_t in_min, int32_t in_max, int32_t out_min, int32_t out_max) {
-        return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    }
-
     Accelerometer::Accelerometer() {
-        m_AccelData = (int16_t *) malloc(3 * sizeof(int16_t));
-        m_GyroData = (int16_t *) malloc(3 * sizeof(int16_t));
+        m_AccelData = (int32_t *) malloc(3 * sizeof(int32_t));
+        m_GyroData = (int32_t *) malloc(3 * sizeof(int32_t));
 
         m_AccelAngles = (float *) malloc(3 * sizeof(float));
         m_GyroAngles = (float *) malloc(3 * sizeof(float));
@@ -57,11 +53,11 @@ namespace CanSat {
     }
 
     float Accelerometer::accel_angle(float a, float b, float c) const {
-        return 57.295 * atan(a / sqrt(pow(b, 2) + pow(c, 2)));
+        return 57.295f * atan(a / sqrt(pow(b, 2) + pow(c, 2)));
     }
 
     float Accelerometer::gryo_angle(float prev_data, int32_t data, int32_t delta) const {
-        return prev_data + data * delta * 0.001;
+        return prev_data + data * delta * 0.001f;
     }
 
     void Accelerometer::accel_angles() {

@@ -28,8 +28,8 @@ namespace CanSat {
         void restart() const;
         void stop() const;
 
-        unsigned char send_byte(unsigned char data) const;
-        unsigned char get_byte(unsigned char last_byte) const;
+        uint8_t send_byte(uint8_t data) const;
+        uint8_t get_byte(uint8_t last_byte) const;
     };
 
 }// namespace CanSat

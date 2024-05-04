@@ -6,7 +6,7 @@
 
 namespace CanSat {
 
-    volatile unsigned char i2c_frame_error = 0;
+    volatile uint8_t i2c_frame_error = 0;
 
     I2C::I2C() {
         I2C_DDR &= ~_BV(SDA);
@@ -61,9 +61,9 @@ namespace CanSat {
         I2C_DELAY
     }
 
-    unsigned char I2C::send_byte(unsigned char data) const {
-        unsigned char i;
-        unsigned char ack = 1;
+    uint8_t I2C::send_byte(uint8_t data) const {
+        uint8_t i;
+        uint8_t ack = 1;
 
         for (i = 0; i < 8; i++) {
             if ((data & 0x80) == 0x00) I2C_DDR |= _BV(SDA);
@@ -94,8 +94,8 @@ namespace CanSat {
         return ack;
     }
 
-    unsigned char I2C::get_byte(unsigned char last_byte) const {
-        unsigned char i, res = 0;
+    uint8_t I2C::get_byte(uint8_t last_byte) const {
+        uint8_t i, res = 0;
         I2C_DDR &= ~_BV(SDA);
 
         for (i = 0; i < 8; i++) {
