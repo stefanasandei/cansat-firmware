@@ -24,7 +24,7 @@ int main(void) {
 
         // (void) sprintf(msg, "%ld,%ld,%ld\n",
         //                spatial.x, spatial.y, spatial.z);
-        (void) sprintf(msg, "%d\n", temp);
+        (void) sprintf(msg, "temp: %ld\n", temp);
         com.write(msg);
 
         _delay_ms(100);
