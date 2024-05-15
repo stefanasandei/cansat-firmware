@@ -45,13 +45,13 @@ namespace CanSat {
         data = value / 340 + 31.53f;
     }
 
-    void Accelerometer::get_accel() {
+    void Accelerometer::get_raw_accel() {
         m_AccelData[0] = get_reg(ACCEL_XOUT_H, 2);
         m_AccelData[1] = get_reg(ACCEL_YOUT_H, 2);
         m_AccelData[2] = get_reg(ACCEL_ZOUT_H, 2);
     }
 
-    void Accelerometer::get_gyro() {
+    void Accelerometer::get_raw_gyro() {
         m_GyroData[0] = get_reg(GYRO_XOUT_H, 2);
         m_GyroData[1] = get_reg(GYRO_YOUT_H, 2);
         m_GyroData[2] = get_reg(GYRO_ZOUT_H, 2);
@@ -66,7 +66,7 @@ namespace CanSat {
     }
 
     void Accelerometer::accel_angles() {
-        get_accel();
+        get_raw_accel();
 
         m_AccelAngles[0] = accel_angle(m_AccelData[0], m_AccelData[1], m_AccelData[2]);
         m_AccelAngles[1] = accel_angle(m_AccelData[1], m_AccelData[0], m_AccelData[2]);
@@ -74,7 +74,7 @@ namespace CanSat {
     }
 
     void Accelerometer::gyro_angles(float *prev_data, int32_t delta) {
-        get_gyro();
+        get_raw_gyro();
 
         m_GyroAngles[0] = gryo_angle(prev_data[0], m_GyroData[0], delta);
         m_GyroAngles[1] = gryo_angle(prev_data[1], m_GyroData[1], delta);
