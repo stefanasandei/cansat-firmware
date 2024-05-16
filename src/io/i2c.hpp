@@ -10,8 +10,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define SDA 4
-#define SCL 5
 #define I2C_PORT PORTC
 #define I2C_PIN PINC
 #define I2C_DDR DDRC
@@ -21,7 +19,7 @@ namespace CanSat {
 
     class I2C {
     public:
-        I2C();
+        I2C(int sda, int scl);
         ~I2C();
 
         void start() const;
@@ -30,6 +28,9 @@ namespace CanSat {
 
         uint8_t send_byte(uint8_t data) const;
         uint8_t get_byte(uint8_t last_byte) const;
+
+    private:
+        int SDA, SCL;
     };
 
 }// namespace CanSat

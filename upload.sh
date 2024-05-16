@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Arduino settings
-MCU="atmega328p"
+MCU="m328p"
 PROGRAMMER="arduino"
 
 # Paths
@@ -27,4 +27,4 @@ fi
 
 echo "Arduino found on port: $PORT"
 echo "Uploading firmware to Arduino..."
-$AVRDUDE -v -p $MCU -c $PROGRAMMER -P $PORT -D -U flash:w:$FIRMWARE:i
+$AVRDUDE -v -p $MCU -c $PROGRAMMER -P $PORT -b57600 -D -U flash:w:$FIRMWARE:i

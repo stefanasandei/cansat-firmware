@@ -21,8 +21,8 @@ $(BIN_DIR)/firmware.hex: $(BIN_DIR)/firmware.out
 $(BIN_DIR)/firmware.out: $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIRS)
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(OBJECTS): $(SOURCES) | $(OBJ_DIRS)
+	$(CC) $(CFLAGS) -c -o $@ $(patsubst $(BIN_DIR)/%.o, $(SRC_DIR)/%.cpp, $@)
 
 $(OBJ_DIRS):
 	mkdir -p $(OBJ_DIRS)

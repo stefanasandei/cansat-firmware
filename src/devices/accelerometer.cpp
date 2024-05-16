@@ -9,7 +9,8 @@
 
 namespace CanSat {
 
-    Accelerometer::Accelerometer() {
+    Accelerometer::Accelerometer() : m_I2C(2, 3) {
+
         m_AccelData = (int32_t *) malloc(3 * sizeof(int32_t));
         m_GyroData = (int32_t *) malloc(3 * sizeof(int32_t));
 

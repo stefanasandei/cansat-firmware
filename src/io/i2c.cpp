@@ -8,7 +8,7 @@ namespace CanSat {
 
     volatile uint8_t i2c_frame_error = 0;
 
-    I2C::I2C() {
+    I2C::I2C(int sda, int scl) : SDA(sda), SCL(scl) {
         I2C_DDR &= ~_BV(SDA);
         I2C_DDR &= ~_BV(SCL);
 
