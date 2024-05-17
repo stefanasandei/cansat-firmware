@@ -4,6 +4,7 @@
 
 #include "devices/accelerometer.hpp"
 #include "io/communicator.hpp"
+#include "io/rom.hpp"
 
 #include <stdio.h>
 #include <string.h>
@@ -17,13 +18,12 @@ int main(void) {
     CanSat::Communicator com(0, 1);
     CanSat::Accelerometer acc;
 
+    CanSat::Rom rom;
+
     CanSat::SpatialData spatial{};
     int32_t temp;
 
-    // from 0 to E2END
-    uint8_t val = 0, *addr = 0;
-    eeprom_write_byte(addr, 3);
-    val = eeprom_read_byte(addr);
+    rom.write(420, 69);
 
     for (;;) {
         acc.get_rotation(spatial);
@@ -32,6 +32,8 @@ int main(void) {
         (void) sprintf(msg, "(%ld,%ld,%ld);",
                        spatial.x, spatial.y, spatial.z);
         (void) sprintf(msg + strlen(msg), "(%ld);\n", temp);
+
+        (void) sprintf(msg, "read %d\n", rom.read(420));
 
         com.write(msg);
 
