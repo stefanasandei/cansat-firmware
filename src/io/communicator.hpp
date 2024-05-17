@@ -13,10 +13,11 @@ namespace CanSat {
 
     class Communicator {
     public:
-        Communicator(int recv, int trans);
+        Communicator(int recv, int trans, int baud = BUAD);
         ~Communicator();
 
         void write(char *msg);
+        char *read();
 
     private:
         void init() const;
@@ -24,6 +25,8 @@ namespace CanSat {
 
     private:
         int m_RX, m_TX;
+        static const int BUFFER_SIZE = 128;// Define a buffer size
+        char m_buffer[BUFFER_SIZE];        // Buffer for storing received data
     };
 
 }// namespace CanSat

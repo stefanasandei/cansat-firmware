@@ -8,7 +8,7 @@
 
 namespace CanSat {
 
-    Communicator::Communicator(int recv, int trans) : m_RX(recv), m_TX(trans) {
+    Communicator::Communicator(int recv, int trans, int baud) : m_RX(recv), m_TX(trans) {
         init();
     }
 
@@ -41,5 +41,23 @@ namespace CanSat {
             UDR0 = msg[i];
         }
     }
+
+    char *Communicator::read() {
+        int index = 0;
+        while (index < BUFFER_SIZE - 1) {
+            // Wait for data to be received
+            while (!(UCSR0A & (1 << RXC0))) {
+            }
+            // Get and return received data from buffer
+            char receivedChar = UDR0;
+            if (receivedChar == '\n') {
+                break;// End reading on newline character
+            }
+            m_buffer[index++] = receivedChar;
+        }
+        m_buffer[index] = '\0';// Null-terminate the string
+        return m_buffer;
+    }
+
 
 }// namespace CanSat
