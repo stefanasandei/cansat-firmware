@@ -43,7 +43,7 @@ namespace CanSat {
 
     void Accelerometer::get_temp(int32_t &data) {
         int32_t value = get_reg(TEMP_OUT_H, 2);
-        data = value / 340 + 31.53f;
+        data = (value + 9421) / 340;
     }
 
     void Accelerometer::get_raw_accel() {

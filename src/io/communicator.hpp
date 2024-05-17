@@ -13,7 +13,7 @@ namespace CanSat {
 
     class Communicator {
     public:
-        Communicator();
+        Communicator(int recv, int trans);
         ~Communicator();
 
         void write(char *msg);
@@ -21,6 +21,9 @@ namespace CanSat {
     private:
         void init() const;
         void wait() const;
+
+    private:
+        int m_RX, m_TX;
     };
 
 }// namespace CanSat

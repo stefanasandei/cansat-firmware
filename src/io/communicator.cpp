@@ -8,20 +8,26 @@
 
 namespace CanSat {
 
-    Communicator::Communicator() {
+    Communicator::Communicator(int recv, int trans) : m_RX(recv), m_TX(trans) {
         init();
     }
 
     Communicator::~Communicator() {}
 
     void Communicator::init() const {
-        // High and low bits
-        UBRR0H = (BUAD_RATE_CALC >> 8);
-        UBRR0L = BUAD_RATE_CALC;
+        // Set RX and TX pins as inputs/outputs
+        DDRD |= (1 << m_TX); // Set TX pin as output
+        DDRD &= ~(1 << m_RX);// Set RX pin as input
 
-        // transimit and recieve enable
-        UCSR0B = (1 << TXEN0) | (1 << TXCIE0) | (1 << RXEN0) | (1 << RXCIE0);
-        UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);// 8 bit data format
+        // Set baud rate
+        unsigned int ubrr = F_CPU / 16 / BUAD - 1;
+        UBRR0H = (unsigned char) (ubrr >> 8);
+        UBRR0L = (unsigned char) ubrr;
+
+        // Enable receiver and transmitter
+        UCSR0B = (1 << TXEN0) | (1 << RXEN0);
+        // Set frame format: 8data, 1stop bit
+        UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
     }
 
     void Communicator::wait() const {
