@@ -49,6 +49,8 @@ namespace CanSat {
 
         SensorData data;
         char msg[1024];
+        int series_logged = 0;
+        intptr_t curr_addr = 0;
     };
 
 }// namespace CanSat

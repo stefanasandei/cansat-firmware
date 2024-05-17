@@ -13,6 +13,9 @@
 
 namespace CanSat {
 
+    constexpr int MAX_SERIES = Rom::max_size() / sizeof(SensorData) * 2;
+    constexpr bool PROD = false;
+
     Application::Application() : com(0, 1), gps(4, 3, 9600) {}
 
     Application::~Application() {}
@@ -40,7 +43,6 @@ namespace CanSat {
         }
 
         com.write(msg);
-        _delay_ms(300);
     }
 
     void Application::loop_debug() {
@@ -51,9 +53,24 @@ namespace CanSat {
     }
 
     void Application::loop_plot() {
-        (void) sprintf(msg, "%ld,%ld,%ld,%ld,%ld,%ld,\n", data.spatial.x, data.spatial.y, data.spatial.z, data.temp, data.pressure);
+        (void) sprintf(msg, "%ld,%ld,%ld,%ld,%ld,\n", data.spatial.x, data.spatial.y, data.spatial.z, data.temp, data.pressure);
     }
 
-    void Application::loop_prod() {}
+    void Application::loop_prod() {
+        if (series_logged > MAX_SERIES || curr_addr > 1000)
+            return;
+
+        if (!PROD)
+            return;
+
+        rom.write(curr_addr++, data.spatial.x);
+        rom.write(curr_addr++, data.spatial.y);
+        rom.write(curr_addr++, data.spatial.z);
+
+        rom.write(curr_addr++, data.temp);
+        rom.write(curr_addr++, data.pressure);
+
+        series_logged++;
+    }
 
 }// namespace CanSat

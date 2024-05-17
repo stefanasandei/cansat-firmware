@@ -22,6 +22,8 @@ namespace CanSat {
         void write(intptr_t addr, uint8_t value) const;
         uint8_t read(intptr_t addr) const;
 
+        static int constexpr max_size() { return E2END; }
+
     private:
         bool out_of_bounds(intptr_t addr) const;
 
