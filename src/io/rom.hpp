@@ -31,4 +31,4 @@ namespace CanSat {
 
 }// namespace CanSat
 
-#endif//COMMUNICATOR_HPP
+#endif//ROM_HPP

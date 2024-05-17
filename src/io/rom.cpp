@@ -18,7 +18,7 @@ namespace CanSat {
     void Rom::write(intptr_t addr, uint8_t value) const {
         if (out_of_bounds(addr)) return;
 
-        eeprom_write_byte((uint8_t *) (addr), value);
+        eeprom_update_byte((uint8_t *) (addr), value);
     }
 
     uint8_t Rom::read(intptr_t addr) const {
