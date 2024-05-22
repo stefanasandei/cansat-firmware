@@ -1,0 +1,75 @@
+%% ROSPINCanSat.sty
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ROSPINCanSat}[2023/01/27 CanSat Competition PDF Style]
+
+\RequirePackage{amsmath, amsfonts, amssymb, amsthm, graphicx}
+\RequirePackage[margin=1in]{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{hyperref}
+\RequirePackage{cleveref}
+\RequirePackage[table,xcdraw,usenames,dvipsnames]{xcolor}
+\RequirePackage{titlesec, lettrine, textcase, relsize}
+\RequirePackage{fix-cm}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{enumitem}
+\RequirePackage{helvet}
+\fontfamily{phv}\selectfont
+
+\newcommand{\cansattitle}{
+  \begin{center}
+  \textbf{\@title}
+
+  \vspace{0.5cm}
+  \textbf{\@author}
+
+  \vspace{0.5cm}
+  \textbf{\@date}
+  \end{center}
+}
+
+\newcommand{\righttext}{\textbf{Romanian CanSat and \\Rocketry Competition}}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L,R]{\thepage}
+\fancyhead[R]{\textbf{\leftmark}}
+\fancyhead[LO]{\textbf{\rightmark}}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyhead[L]{\includegraphics[scale=0.15]{images/RCRC_2023_logo.png}}
+  \fancyhead[R]{\righttext}
+  \fancyfoot[R]{\textbf{\thepage}}%
+}
+
+\titleformat{\section}[block]{\Large\filcenter\textsc}{\thesection}{1em}{\scshape}
+\titleformat{\subsection}[block]{\large\textsc}{\thesubsection.}{1em}{\scshape}
+\titleformat{\subsubsection}[block]{\large\textsc}{\thesubsubsection.}{1em}{\scshape}
+
+\AtBeginDocument{
+  \pagestyle{empty}
+}
+
+\renewcommand{\title}[1]{\def\@title{#1}}
+\renewcommand{\author}[1]{\def\@author{#1}}
+\renewcommand{\date}[1]{\def\@date{#1}}
+
+\definecolor{gray}{rgb}{0.60, 0.60, 0.60}
+\newcommand{\coloredbox}[3]{
+    \begin{tcolorbox}[colback=#1, colframe=#2, arc=2mm, boxrule=0mm]
+        {\color{white} #3}
+    \end{tcolorbox}
+}
+
+\newcommand{\setitemizespacing}[1]{%
+  \setlength{\itemsep}{#1}%
+}
+
+\setlist{nolistsep}
+\setlist{itemsep=0pt, parsep=0pt}
+
+\newcommand{\cansatstyle}{
+  \setlength{\headheight}{40.3135pt}
+  \addtolength{\topmargin}{-1.9728pt}
+}

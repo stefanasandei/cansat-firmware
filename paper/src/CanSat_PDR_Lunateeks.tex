@@ -1,0 +1,53 @@
+\documentclass[11pt]{article}
+\usepackage{ROSPINCanSat, multicol, graphicx, float, tabularx}
+\graphicspath{ {./images/} }
+\setcounter{tocdepth}{2}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\cansatstyle
+
+\title{Flight Readiness Review}
+\author{Team: Lunateeks}
+\date{\today}
+
+\begin{document}
+
+\cansattitle
+
+\tableofcontents
+\pagestyle{plain}
+
+\newpage
+
+\section{Progress report}
+
+\input{chapters/progress-report}
+
+\section{Mission Overview}
+
+\input{chapters/mission-overview}
+
+\section{Test Plan}
+
+\input{chapters/test-plan}
+
+\section{Test Results}
+
+\input{chapters/test-results}
+
+\section{Conclusion}
+
+\input{chapters/conclusion}
+
+\section{References}
+
+\input{chapters/references}
+
+\end{document}
+
