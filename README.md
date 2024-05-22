@@ -1,6 +1,6 @@
-# Cansat Firmware
+# CanSat
 
-This is the firmare, of the Cansat of the team Lunateeks, for the 2023-2024 edition of the Romanian Cansat and Rocketry Competition.
+This is the source code for the CanSat of the team Lunateeks, for the 2023-2024 edition of the Romanian Cansat and Rocketry Competition.
 
 ## Usage
 
@@ -16,13 +16,13 @@ $ make
 
 2. Upload the firmare to the Arduino
 
-Modify the `upload.bat` script first to update the avrdude config path and the port.
+Modify the `upload.sh` script first to update the avrdude config path and the port.
 
 ```
-$ upload
+$ ./upload.sh
 ```
 
-Make sure the Arduino UNO is connected to the PC when running this command!
+Make sure the Arduino Nano is connected to the PC when running this command.
 
 ## License
 
